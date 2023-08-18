@@ -8,19 +8,17 @@ const ECDSA = require("xrpl/dist/npm/ECDSA");
 
  
 
- 
+function createWallet() {
 
-async function createWallet() {
-
- 
-
-    let newWallet = Wallet.generate(ECDSA.ed25519);
+    const newWallet = Wallet.generate(ECDSA.ed25519);
 
  
 
     console.log(newWallet);
 
  
+
+    return newWallet.seed.toString();
 
 }
 
@@ -30,19 +28,13 @@ async function createWallet() {
 
  
 
-async function fundWallet() {
-
  
 
-    let wallet = Wallet.fromSeed("sEdTcpfZ5CVqm6sxc86ZVmhjsE4L3GM");
+async function fundWallet(seed) {
 
- 
+    const wallet = Wallet.fromSeed(seed);
 
-    let client = new Client("wss://s.altnet.rippletest.net/");
-
- 
-
- 
+    const client = new Client("wss://s.altnet.rippletest.net/");
 
  
 
@@ -54,19 +46,20 @@ async function fundWallet() {
 
  
 
- 
-
- 
-
-    let result = await client.fundWallet(wallet);
+    const result = await client.fundWallet(wallet);
 
  
 
     console.log(result);
 
- 
-
 }
 
+ 
+
+ 
+
+ 
+
 //createWallet();
-fundWallet();
+
+fundWallet(createWallet());

@@ -1,4 +1,4 @@
-import{Wallet, Client, NFTokenMint, convertStringToHex} from 'xrpl';
+import{Wallet, Client, NFTokenMint, convertStringToHex, NFTokenMintFlags} from 'xrpl';
 
  
 
@@ -30,7 +30,9 @@ try{
 
         TransactionType: "NFTokenMint",
 
-        URI:convertStringToHex("Dishant")
+        URI:convertStringToHex("Dishant"),
+        Flags: NFTokenMintFlags.tfTransferable
+
 
  
 

@@ -1,16 +1,22 @@
-const { Wallet, Client, convertStringToHex,AccountNFTsRequest } = require('xrpl');
+const { Wallet, Client, NFTokenMint, convertStringToHex, AccountNFTsRequest, parseNFTokenID } = require('xrpl');
+
+ 
 
 async function mintNFT() {
 
     try {
 
-        let wallet = Wallet.fromSeed("sEdTcpfZ5CVqm6sxc86ZVmhjsE4L3GM");
+        const wallet = Wallet.fromSeed("sEdS7C5vCoid6FaunQ24GLVnWaXqL5d");
 
-        let client = new Client("wss://s.altnet.rippletest.net/");
+        const client = new Client("wss://s.altnet.rippletest.net/");
+
+ 
 
         await client.connect();
 
-        let accountNFTsRequest = {
+ 
+
+        const accountNFTsRequest = {
 
             account: wallet.classicAddress,
 
@@ -18,11 +24,31 @@ async function mintNFT() {
 
         };
 
-        let accNftResponse = await client.request(accountNFTsRequest);
+ 
+
+        const accNftResponse = await client.request(accountNFTsRequest);
 
         console.log(accNftResponse);
 
-        console.log(accNftResponse.result.AccountNFTsRequest)
+ 
+
+        console.log(accNftResponse.result.account_nfts);
+
+ 
+
+        accNftResponse.result.account_nfts.forEach(nft => {
+
+            const parsedNftokenID = parseNFTokenID(nft.NFTokenID);
+
+            console.log(parsedNftokenID);
+
+        });
+
+ 
+
+        const parsedNftokenID = parseNFTokenID(accNftResponse.result.account_nfts[0].NFTokenID);
+
+        console.log(parsedNftokenID);
 
  
 
@@ -33,5 +59,7 @@ async function mintNFT() {
     }
 
 }
+
+ 
 
 mintNFT();

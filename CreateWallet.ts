@@ -2,16 +2,17 @@ import { Wallet,Client } from "xrpl";
 
 import ECDSA from "xrpl/dist/npm/ECDSA";
 
-async function CreateWallet() {
+function CreateWallet(): string {
 
     let newWallet = Wallet.generate(ECDSA.ed25519)
 
     console.log(newWallet);
+    return newWallet.seed+"";
 }
 
-    async function fundWallet() {
+    async function fundWallet(seed:string) {
 
-        let wallet = Wallet.fromSeed("sEd716b5piTG9dvBmUMAyvcQiUXUcAK");
+        let wallet = Wallet.fromSeed("seed");
 
         let client = new Client("was://s.altnet.rippletest.net/");
 
