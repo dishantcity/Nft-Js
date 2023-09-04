@@ -8,27 +8,17 @@ const NFTokenMintFlags = xrpl.NFTokenMintFlags;
 
 const convertStringToHex = xrpl.convertStringToHex;
 
- 
-
 async function mintNFT() {
 
     try {
 
         let wallet = Wallet.fromSeed("sEdS7C5vCoid6FaunQ24GLVnWaXqL5d");
 
- 
-
         let client = new Client("wss://s.altnet.rippletest.net/");
-
- 
-
- 
 
         wallet.sign
 
         await client.connect();
-
- 
 
         let nftMint = {
 
@@ -38,21 +28,15 @@ async function mintNFT() {
 
             TransactionType: "NFTokenMint",
 
-            URI: convertStringToHex("Dishant"),
+            URI: convertStringToHex('https://ipfs.io/ipfs/QmXvmTs5CmCFMPNdB6xFNr4FNCCbutPRH1NpQU5LrhA3CM?filename=pexels-pok-rie-2049422.jpg'),
 
             Flags:NFTokenMintFlags.tfTransferable
 
-           
-
         };
-
- 
 
         let signedTrx = wallet.sign(nftMint);
 
         console.log(signedTrx);
-
- 
 
         let submittedTrx = await client.submit(nftMint, { autofill: true, wallet: wallet });
 
@@ -63,9 +47,6 @@ async function mintNFT() {
         console.log(err);
 
     }
-
 }
-
- 
 
 mintNFT();

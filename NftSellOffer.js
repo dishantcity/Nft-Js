@@ -10,15 +10,9 @@ async function sellNFT() {
 
         const wallet_user = Wallet.fromSeed("sEdS7C5vCoid6FaunQ24GLVnWaXqL5d");
 
- 
-
         const client = new Client("wss://s.altnet.rippletest.net/");
 
- 
-
         await client.connect();
-
- 
 
         const nftselloffer = {
 
@@ -36,8 +30,6 @@ async function sellNFT() {
 
         };
 
- 
-
         const trxResult = await client.submit(nftselloffer, { autofill: true, wallet: wallet_issuer });
 
         console.log(trxResult);
@@ -49,7 +41,5 @@ async function sellNFT() {
     }
 
 }
-
- 
 
 sellNFT();
